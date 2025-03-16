@@ -1,0 +1,74 @@
+_format_version: "3.0"
+
+services:
+  - name: generate-jwt
+    url: http://jwt-generator:8010
+    routes:
+      - name: jwt-public
+        paths:
+          - /
+
+  - name: postman-echo-secure
+    url: https://postman-echo.com
+    routes:
+      - name: echo-route-secure
+        paths:
+          - /echo
+        plugins:
+          - name: jwt
+            config:
+              uri_param_names: []  # Disable JWT via URI params
+              cookie_names: []     # Disable JWT via cookies
+              key_claim_name: kid  # Keycloak includes `kid` in its JWT header
+              claims_to_verify:
+                - exp             # Verify expiration
+                #- nbf             # Verify "not before"
+              secret_is_base64: false
+              run_on_preflight: false
+
+consumers:
+  - username: consumer-key-1
+    jwt_secrets:
+      - key: CWsZvlQKT9_QTjjqUjkmjPLkNiIg0Z469nhwtpXo5Yk
+        algorithm: RS256
+        rsa_public_key: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtG2q/q8UYjJ2SAinKGZm
+          c24QKjjyLo6ET8rCNGSvRqUWikoWwMSQSPnluL6O+OqvchP0r/JY6OxkHFxVKEIJ
+          8ahNZBgGf2JM03phEFtFDcKQ+nWmRq1+jD1JqRb6ESx9fPsIzSd75bWwVXxvluUh
+          8zRhvsfO3aWg6oKUkCLfWDmcknC7UwrhYwAkiclemCGuKNEo9qrrSr6g8S+U2Bex
+          M61dLWwXNVy5kCIRlwe3ooBuXDCblC0WZLfTFI8KgyV4BveJac4LGI+xMPh8dNZX
+          C/Bc2EX4yfso/pbxCgYhAakKWDYJ067uqlYXIK4XlpS/y9jd+OJ6FiNhRejr/n58
+          +wIDAQAB
+          -----END PUBLIC KEY-----
+
+  - username: consumer-key-2
+    jwt_secrets:
+      - key: -KstUm4KaVjftH0kQCyeD5wdZUg_IhuU0tJIa2zknPk
+        algorithm: RS256
+        rsa_public_key: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtu/+bVwOosa15tRjxLtA
+          a0QtQk0ulT0aP+6ZXKOz3b/SQvrB0hEYwEFi3cvcoNj6qgo0xnMGzpniFsYVpsqK
+          KfX/068ha54iouN6QSmhBT82tQEfXYIGo7B61nWjKI+P4ZcngWUigiw7VOJt/70y
+          kxlj6NLZ7HIude20+JNNIoLawO6NQlfRPgTXLcgBhlW6v3dtmjFHveCCtukUsCGy
+          Fktr3EPB+9NiqgAoFAbGUaP2fovdppeI0QLCf4mWnhiiiqNf5pxW/mum2nRJQYLT
+          Lmj5WYeFG5XHhk9XvUleMsoSjVMw92BKiWpMJ+v9vJJDcCtIN9tVU0N/Z1FaYbqr
+          gQIDAQAB
+          -----END PUBLIC KEY-----
+  
+  - username: consumer-key-3
+    jwt_secrets:
+      - key: CAy56BZlxcmnLPk2hEXbdvWjZL9oi2BwSLG6j9NlR0E
+        algorithm: RS256
+        rsa_public_key: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyAZ7sSPdPCvc6bOqlSnn
+          vRcaNOYFhUgH9yJ7TSEcE41duNB8yOWKtjq2ZhQINJjhsWYogyrEt4i1mPq9lwkL
+          G8PtxVo3YdzY7/4L1DpEkU3I+u/zgGRJocSObdn3aHyqeKx8YvFCwe/jjuyk1X5u
+          z1hoguhDWEg/8DH9v3vTi4UZVPvikrrXhdbLhMYf+nKfVdbjYn1Y54u6QUwSraTj
+          kNv0NupUU4DQRmGmR/Q4Qq55Z467f7WYhOe4VzLTsxpo7PolKmuHqi6PXX4NPsv6
+          gxSlHd3xuWTlc31nsymfl9I0zwrpMWcy1kv69FE+KtndBj8KoOEeOYk9gTObpP50
+          PwIDAQAB
+          -----END PUBLIC KEY-----
+      
