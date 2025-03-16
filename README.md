@@ -38,6 +38,9 @@ kid: "CAy56BZlxcmnLPk2hEXbdvWjZL9oi2BwSLG6j9NlR0E"
 
 ## Validate the JWT
 
+To examine the structure and content of your JWT, visit https://jwt.io and paste your token into the decoder. This tool will display the header, payload, and verify the signature of your JWT.
+
+
 To validate a JWT, send a request to Kong with the generated token:
 
 
