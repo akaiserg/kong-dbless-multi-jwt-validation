@@ -26,7 +26,7 @@ services:
       - KONG_ADMIN_ERROR_LOG=/dev/stderr
       - KONG_ADMIN_LISTEN=0.0.0.0:8001
     volumes:
-      - ./kong.yml:/etc/kong/kong.yml:ro
+      - ./kong-services.yml:/etc/kong/kong.yml:ro
     healthcheck:
       test: ["CMD", "kong", "health"]
       interval: 15s
